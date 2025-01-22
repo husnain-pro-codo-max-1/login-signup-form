@@ -7,11 +7,12 @@ const Signup = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
-
+// THIS IS MY EMAIL VALIDATION LOGIN 
   const isValidEmail = (email) => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return emailRegex.test(email);
   };
+  // END MY EMAIL VALIDATION LOGIC
 
   const isValidPassword = (password) => {
     return password.length >= 6; // Password should be at least 6 characters
