@@ -8,13 +8,26 @@ const Signup = () => {
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
 
+  const isValidEmail = (email) => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+  };
+
+  const isValidPassword = (password) => {
+    return password.length >= 6; // Password should be at least 6 characters
+  };
+
   const createuser = (e) => {
     e.preventDefault();
-    if (email && password) {
+    if (!email || !password) {
+      alert('Please fill in both email and password');
+    } else if (!isValidEmail(email)) {
+      alert('Invalid email format. Please enter a valid email address like "example@domain.com".');
+    } else if (!isValidPassword(password)) {
+      alert('Password must be at least 6 characters long');
+    } else {
       // Navigate to Home component with state
       navigate('/home', { state: { email, password } });
-    } else {
-      alert('Please fill in both email and password');
     }
   };
 
@@ -28,19 +41,19 @@ const Signup = () => {
               type="text"
               onChange={(e) => setEmail(e.target.value)}
               value={email}
-              placeholder="Enter Email"
+              placeholder="eg:husnain@gmail.com"
               className="shadow-2xl rounded-lg py-3 hover:bg-slate-300 pl-2"
             />
             <input
               type="password"
               onChange={(e) => setPassword(e.target.value)}
               value={password}
-              placeholder="Enter Password"
+              placeholder="eg:husnain$$@@"
               className="shadow-2xl rounded-lg py-3 hover:bg-slate-300 pl-2"
             />
             <button
               onClick={createuser}
-              className="bg-[#FFFFFF] w-[40%] px-3 py-2 text-2xl xs:text-sm sm:text-2xl md:text-2xl lg:text-xl xl:text-2xl 2xl:text-2xl rounded-lg shadow-2xl text-center text-gray-400 mx-auto font-medium hover:bg-slate-300"
+              className="bg-[#A855F7] w-[40%] px-3 py-2 text-2xl xs:text-sm sm:text-2xl md:text-2xl lg:text-xl xl:text-2xl 2xl:text-2xl rounded-lg shadow-2xl text-center text-white mx-auto font-medium hover:bg-slate-300"
             >
               Sign Up
             </button>
